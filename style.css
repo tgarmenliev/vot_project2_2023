@@ -2,27 +2,73 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 20px;
+  background-color: #f2f2f2;
 }
 
 h1 {
   margin-top: 0;
+  text-align: center;
+  color: #333;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 form {
   margin-bottom: 20px;
 }
 
-input, select, button {
+input, textarea, select, button {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   margin-bottom: 10px;
+  font-size: 14px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: #fff;
+  cursor: pointer;
 }
 
 .travel-plan {
   border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  min-height: 90px;
+}
+
+.travel-plan p {
+  margin: 0;
+  font-weight: bold;
+  color: #333;
 }
 
 .travel-plan button {
-  margin-left: 10px;
+  background-color: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  float: right;
 }
 
+.travel-plan button.details-button {
+  background-color: #2196F3;
+}
+
+/* Adjust the height of the eventDescription textarea */
+#eventDescription {
+  height: 100px;
+}
