@@ -2,30 +2,34 @@
 <html>
 <head>
   <title>Travel Planner</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <h1>Travel Planner</h1>
+  <div class="container">
+    <h1>Travel Planner</h1>
 
-  <form id="travelForm">
-    <input type="text" id="description" placeholder="Description" required>
-    <input type="date" id="date" required>
-    <input type="text" id="hours" placeholder="Hours" required>
-    <input type="text" id="startLocation" placeholder="Start Location" required>
-    <input type="text" id="destination" placeholder="Destination" required>
-    <input type="number" id="tripNumber" placeholder="Number of the Trip" required>
-    <select id="transport">
-      <option value="rail">Rail</option>
-      <option value="car">Car</option>
-      <option value="plane">Plane</option>
-      <option value="bus">Bus</option>
-    </select>
-    <button type="submit">Add Travel Plan</button>
-  </form>
+    <form id="travelForm">
+      <input type="text" id="eventName" placeholder="Short name for the event (up to 10 words)" required>
+      <textarea id="eventDescription" placeholder="Description of the event (optional, up to 500 symbols)" rows="4" maxlength="500"></textarea>
+      <input type="date" id="eventDate" required>
+      <input type="text" id="startLocation" placeholder="Start Location" required>
+      <input type="text" id="destination" placeholder="Destination" required>
+      <input type="text" id="departureTime" placeholder="Hour of departure" required>
+      <input type="text" id="arrivalTime" placeholder="Arrival hour" required>
+      <input type="text" id="tripNumber" placeholder="Number of the Trip (optional, up to 10 words)">
+      <select id="transport">
+        <option value="rail">Rail</option>
+        <option value="car">Car</option>
+        <option value="plane">Plane</option>
+        <option value="bus">Bus</option>
+        <option value="ship">Ship</option>
+      </select>
+      <button type="submit">Add Travel Plan</button>
+    </form>
 
-  <div id="travelPlans"></div>
+    <div id="travelPlans"></div>
+  </div>
 
   <script src="script.js"></script>
 </body>
 </html>
-
