@@ -9,8 +9,8 @@
     <h1>Travel Planner</h1>
 
     <form id="travelForm">
-      <input type="text" id="eventName" placeholder="Short name for the event (up to 10 words)" required>
-      <textarea id="eventDescription" placeholder="Description of the event (optional, up to 500 symbols)" rows="4" maxlength="500"></textarea>
+      <input type="text" id="eventName" placeholder="Short name for the event (up to 10 words)" required pattern="^(\w+\s*){1,10}$">
+      <textarea id="eventDescription" placeholder="Description of the event (optional, up to 500 characters)" rows="5" maxlength="500"></textarea>
       <input type="date" id="eventDate" required>
       <input type="text" id="startLocation" placeholder="Start Location" required>
       <input type="text" id="destination" placeholder="Destination" required>
