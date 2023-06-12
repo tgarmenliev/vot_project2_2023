@@ -24,7 +24,10 @@ form {
   margin-bottom: 20px;
 }
 
-input, textarea, select, button {
+input,
+textarea,
+select,
+button {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -68,7 +71,6 @@ button {
   background-color: #2196F3;
 }
 
-/* Adjust the height of the eventDescription textarea */
 #eventDescription {
   height: 100px;
 }
