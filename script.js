@@ -1,91 +1,112 @@
 // Store the travel plans
-let plans = [];
+//let plans = [];
 
-// Function to add a travel plan
-function addPlan(event) {
-  event.preventDefault();
+// callAPI function that takes the base and exponent numbers as parameters
+var callAPI = () => {
+  var eventName = document.getElementById('eventName').value;
+  var eventDescription = document.getElementById('eventDescription').value;
+  var eventDate = document.getElementById('eventDate').value;
+  var startLocation = document.getElementById('startLocation').value;
+  var destination = document.getElementById('destination').value;
+  var departureTime = document.getElementById('departureTime').value;
+  var arrivalTime = document.getElementById('arrivalTime').value;
+  var tripNumber = document.getElementById('tripNumber').value;
+  var transport = document.getElementById('transport').value;
 
-  // Get form values
-  const eventName = document.getElementById('eventName').value;
-  const eventDescription = document.getElementById('eventDescription').value;
-  const eventDate = document.getElementById('eventDate').value;
-  const startLocation = document.getElementById('startLocation').value;
-  const destination = document.getElementById('destination').value;
-  const departureTime = document.getElementById('departureTime').value;
-  const arrivalTime = document.getElementById('arrivalTime').value;
-  const tripNumber = document.getElementById('tripNumber').value;
-  const transport = document.getElementById('transport').value;
-
-  // Create a new plan object
-  const plan = {
-    eventName,
-    eventDescription,
-    eventDate,
-    startLocation,
-    destination,
-    departureTime,
-    arrivalTime,
-    tripNumber,
-    transport
-  };
-
-  // Add the plan to the plans array
-  plans.push(plan);
-
-  // Clear form inputs
-  document.getElementById('eventName').value = '';
-  document.getElementById('eventDescription').value = '';
-  document.getElementById('eventDate').value = '';
-  document.getElementById('startLocation').value = '';
-  document.getElementById('destination').value = '';
-  document.getElementById('departureTime').value = '';
-  document.getElementById('arrivalTime').value = '';
-  document.getElementById('tripNumber').value = '';
-
-  // Refresh the travel plans list
-  displayPlans();
-}
-
-// Function to delete a travel plan
-function deletePlan(index) {
-  plans.splice(index, 1);
-  displayPlans();
-}
-
-// Function to display the travel plans
-function displayPlans() {
-  const travelPlans = document.getElementById('travelPlans');
-  travelPlans.innerHTML = '';
-
-  plans.forEach((plan, index) => {
-    const planElement = document.createElement('div');
-    planElement.className = 'travel-plan';
-
-    const eventName = document.createElement('p');
-    eventName.textContent = plan.eventName;
-
-    const detailsButton = document.createElement('button');
-    detailsButton.textContent = 'View Details';
-    detailsButton.className = 'details-button';
-    detailsButton.addEventListener('click', () => showDetails(index));
-
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
-    deleteButton.addEventListener('click', () => deletePlan(index));
-
-    planElement.appendChild(eventName);
-    planElement.appendChild(detailsButton);
-    planElement.appendChild(deleteButton);
-    travelPlans.appendChild(planElement);
+  // instantiate a headers object
+  var myHeaders = new Headers();
+  // add content type header to object
+  myHeaders.append('Content-Type', 'application/json');
+  // using built-in JSON utility package turn object to string and store in a variable
+  var raw = JSON.stringify({
+    eventName: eventName,
+    eventDescription: eventDescription,
+    eventDate: eventDate,
+    startLocation: startLocation,
+    destination: destination,
+    departureTime: departureTime,
+    arrivalTime: arrivalTime,
+    tripNumber: tripNumber,
+    transport: transport
   });
-}
+  // create a JSON object with parameters for API call and store in a variable
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+  // make API call with parameters and use promises to get response
+  fetch('https://i8b5ylple2.execute-api.eu-north-1.amazonaws.com/dev', requestOptions)
+    .then((response) => response.text())
+    .then((result) => alert(JSON.parse(result).body))
+    .catch((error) => console.log('error', error));
+};
 
-// Function to show the details of a travel plan
-function showDetails(index) {
-  const plan = plans[index];
-  const details = `Event Name: ${plan.eventName}\nDescription: ${plan.eventDescription}\nDate: ${plan.eventDate}\nStart Location: ${plan.startLocation}\nDestination: ${plan.destination}\nDeparture Time: ${plan.departureTime}\nArrival Time: ${plan.arrivalTime}\nNumber of the Trip: ${plan.tripNumber}\nTransport: ${plan.transport}`;
-  alert(details);
-}
+var callAPI2 = () => {
+  var myDiv = document.getElementById('travelPlans');
 
-// Add event listener to the form submission
-document.getElementById('travelForm').addEventListener('submit', addPlan);
+  if (myDiv.innerHTML === '') {
+    // create a JSON object with parameters for API call and store in a variable
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+    // make API call with parameters and use promises to get response
+    fetch('https://i8b5ylple2.execute-api.eu-north-1.amazonaws.com/dev', requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        var travel_plans = JSON.parse(result.body);
+        var plans_element = document.getElementById('travelPlans');
+        plans_element.innerHTML = '';
+        var button = document.getElementById('showHide');
+        button.textContent = 'Hide all';
+        travel_plans.forEach((plan) => {
+          var travel_plan = document.createElement('div');
+          travel_plan.innerHTML = '<h3>' + plan.EventName + ' ' + plan.EventDate + '</h3>';
+          plans_element.appendChild(travel_plan); // corrected variable name
+        });
+      })
+      .catch((error) => console.log('error', error));
+  } else {
+    var button = document.getElementById('showHide');
+    button.textContent = 'Show all';
+    var plans_element = document.getElementById('travelPlans');
+    plans_element.innerHTML = '';
+  }
+};
+
+var callAPI3 = () => {
+  // create a JSON object with parameters for API call and store in a variable
+  var requestOptions = {
+    method: 'GET',
+    redirect: 'follow'
+  };
+  // make API call with parameters and use promises to get response
+  fetch('https://i8b5ylple2.execute-api.eu-north-1.amazonaws.com/dev', requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      var travel_plans = JSON.parse(result.body);
+      var plans_element = document.getElementById('travelPlansDate');
+      plans_element.innerHTML = '';
+
+      var desiredDateInput = document.getElementById('eventDateRequest').value; // Example desired date from input field
+      var desiredDate = new Date(desiredDateInput); // Convert to ISO 8601 format
+
+      var travel_plan2 = document.createElement('div');
+      travel_plan2.innerHTML = '<h3>' + desiredDate + '</h3>';
+      plans_element.appendChild(travel_plan2);
+
+      travel_plans.forEach((plan) => {
+        var dateString = Date.parse(plan.date);
+        var newDate = new Date(dateString);
+        if (newDate - desiredDate === 0) {
+          // Check if event's date matches desired date
+          var travel_plan = document.createElement('div');
+          travel_plan.innerHTML = '<h3>' + plan.EventName + '</h3>';
+          plans_element.appendChild(travel_plan);
+        }
+      });
+    })
+    .catch((error) => console.log('error', error));
+};
