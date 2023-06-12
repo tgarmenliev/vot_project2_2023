@@ -8,6 +8,13 @@
   <div class="container">
     <h1>Travel Planner</h1>
 
+    <div class="text-box">
+      <div class="title">Add a new travel plan here</div>
+      <div class="description">Fill in the form and click the button to add a new travel plan.</div>
+      <div class="description">You can add every type of information for your travel plan.</div>
+      <div class="description">Enjoy :)</div>
+    </div>
+
     <form>
       <input type="text" id="eventName" placeholder="Short name for the event (up to 10 words)" required pattern="^(\w+\s*){1,10}$">
       <textarea id="eventDescription" placeholder="Description of the event (optional, up to 500 characters)" rows="5" maxlength="500"></textarea>
@@ -24,25 +31,52 @@
         <option value="bus">Bus</option>
         <option value="ship">Ship</option>
       </select>
-      <button type="submit" onclick="callAPI()">Add Travel Plan</button>
+      <button class="button" type="submit" onclick="callAPI_PostPlan(document.getElementById('eventName').value,document.getElementById('eventDescription').value,document.getElementById('eventDate').value,document.getElementById('startLocation').value,document.getElementById('destination').value,document.getElementById('departureTime').value,document.getElementById('arrivalTime').value,document.getElementById('tripNumber').value,document.getElementById('transport').value)">Add Travel Plan</button>
     </form>
   </div>
   
   <br><br><br>
   
   <div class="container">
-    <div id="travelPlans"></div>
-    <button type="button" onclick="callAPI2()" id="showHide">Show all travel plans</button>
+    <h2>View all your travel plans by date here =></h2>
+  	<input type="date" id="eventDateRequest">
+  	<div id="travelPlansDate"></div>
+  	<button class="button" type="button" onclick="callAPI_GetByDate()" id="showByDate">Show all on this date</button>
   </div>
   
   <br><br><br>
   
   <div class="container">
-    <input type="date" id="eventDateRequest">
-    <div id="travelPlansDate"></div>
-    <button type="button" onclick="callAPI3()" id="showByDate">Show all on this date</button>
+    <h2>View all your travel plans by name here =></h2>
+  	<input type="text" id="eventNameRequest" placeholder="Short name for the event (up to 10 words)" required pattern="^(\w+\s*){1,10}$">
+  	<div id="travelPlansName"></div>
+  	<button class="button" type="button" onclick="callAPI_GetByName()" id="showByName">Show more details about this travel plan</button>
+  </div>
+  
+  <br><br><br>
+  
+  <div class="container">
+    <h2>View all your travel plans by type of transport here =></h2>
+  	<select id="transportRequest">
+        <option value="rail">Rail</option>
+        <option value="car">Car</option>
+        <option value="plane">Plane</option>
+        <option value="bus">Bus</option>
+        <option value="ship">Ship</option>
+    </select>
+  	<div id="travelPlansType"></div>
+  	<button class="button" type="button" onclick="callAPI_GetByType()" id="showByType">Show more details about this types travel plans</button>
+  </div>
+  
+  <br><br><br>
+  
+  <div class="container">
+    <h2>View all your travel plans here =></h2>
+		<div id="travelPlans"></div>
+    <button class="button" type="button" onclick="callAPI_GetAll()" id="showHide">Show all travel plans</button>
   </div>
 
   <script src="script.js"></script>
 </body>
 </html>
+
