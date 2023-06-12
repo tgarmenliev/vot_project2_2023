@@ -2,13 +2,13 @@
 <html>
 <head>
   <title>Travel Planner</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
   <div class="container">
     <h1>Travel Planner</h1>
 
-    <form id="travelForm">
+    <form>
       <input type="text" id="eventName" placeholder="Short name for the event (up to 10 words)" required pattern="^(\w+\s*){1,10}$">
       <textarea id="eventDescription" placeholder="Description of the event (optional, up to 500 characters)" rows="5" maxlength="500"></textarea>
       <input type="date" id="eventDate" required>
@@ -24,10 +24,23 @@
         <option value="bus">Bus</option>
         <option value="ship">Ship</option>
       </select>
-      <button type="submit">Add Travel Plan</button>
+      <button type="submit" onclick="callAPI()">Add Travel Plan</button>
     </form>
-
+  </div>
+  
+  <br><br><br>
+  
+  <div class="container">
     <div id="travelPlans"></div>
+    <button type="button" onclick="callAPI2()" id="showHide">Show all travel plans</button>
+  </div>
+  
+  <br><br><br>
+  
+  <div class="container">
+    <input type="date" id="eventDateRequest">
+    <div id="travelPlansDate"></div>
+    <button type="button" onclick="callAPI3()" id="showByDate">Show all on this date</button>
   </div>
 
   <script src="script.js"></script>
